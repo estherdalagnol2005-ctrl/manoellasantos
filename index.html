@@ -4,76 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manoella Santos | Nutrição</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #998740;
-            --dark: #2E3518;
+            --dark-green: #4A4F24;
+            --deep-green: #2E3518;
             --bg: #F7F2E6;
-            --text: #1F2118;
             --white: #FFFFFF;
+            --text: #1F2118;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
         /* --- Header --- */
-        header { 
-            padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; 
-            max-width: 1200px; margin: 0 auto; position: relative;
-        }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--dark); letter-spacing: -0.5px; }
-        
+        header { padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--deep-green); }
         .nav { display: flex; gap: 30px; align-items: center; }
         .nav a { text-decoration: none; color: var(--text); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .btn-header { 
-            background: var(--dark); color: var(--white); padding: 10px 20px; border-radius: 5px; 
-            font-size: 0.8rem; font-weight: 600; text-decoration: none; 
-        }
-
-        /* Mobile Menu Icon */
-        .menu-toggle { display: none; cursor: pointer; }
-        .bar { width: 25px; height: 2px; background: var(--dark); margin: 5px 0; }
+        .btn-header { background: var(--deep-green); color: var(--white); padding: 10px 20px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
 
         /* --- Hero --- */
-        .hero { 
-            display: grid; grid-template-columns: 1fr 450px; align-items: center; gap: 80px; 
-            padding: 60px 5%; max-width: 1200px; margin: 0 auto; min-height: 70vh;
-        }
-
-        .hero-content h2 { 
-            font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 20px;
-        }
-        .hero-content h1 { 
-            font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); 
-            line-height: 1.1; color: var(--dark); margin-bottom: 25px;
-        }
+        .hero { display: grid; grid-template-columns: 1fr 450px; align-items: center; gap: 80px; padding: 60px 5% 40px 5%; max-width: 1200px; margin: 0 auto; }
+        .hero-content h2 { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 20px; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; color: var(--deep-green); margin-bottom: 25px; }
         .hero-content p { font-size: 1.1rem; color: #4a4a4a; margin-bottom: 35px; max-width: 500px; }
-
         .btn-group { display: flex; gap: 15px; }
         .btn { padding: 16px 30px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-decoration: none; text-align: center; }
         .btn-main { background: var(--primary); color: white; }
         .btn-sec { border: 1px solid var(--primary); color: var(--primary); }
-
-        .proof { display: flex; align-items: center; gap: 15px; margin-top: 30px; font-size: 0.85rem; color: var(--dark); }
-        .stars { color: var(--primary); }
-
-        /* Imagem */
         .hero-image img { width: 100%; border-radius: 10px; display: block; object-fit: cover; }
 
-        /* --- Responsividade Mobile --- */
+        /* --- Faixa de Autoridade (Stats Bar) --- */
+        .stats-bar { 
+            background: var(--deep-green); 
+            color: var(--white); 
+            padding: 60px 5%; 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 30px; 
+            text-align: center;
+        }
+        .stat-item { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .stat-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 5px; }
+        .stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+
+        /* --- Responsividade --- */
         @media (max-width: 992px) {
             .nav { display: none; }
-            .menu-toggle { display: block; }
-            
             .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; text-align: center; }
             .hero-content { display: flex; flex-direction: column; align-items: center; }
-            .hero-content p { margin-bottom: 25px; }
             .btn-group { flex-direction: column; width: 100%; }
             .btn { width: 100%; }
-            .hero-image { order: -1; padding: 0 10%; } /* Imagem no topo do mobile */
+            .hero-image { order: -1; padding: 0 10%; }
             .hero-image img { height: 350px; }
+            
+            /* Stats Mobile */
+            .stats-bar { grid-template-columns: 1fr 1fr; gap: 40px 20px; padding: 40px 5%; }
         }
     </style>
 </head>
@@ -86,10 +74,6 @@
             <a href="#">Atendimento</a>
             <a href="#">Resultados</a>
         </nav>
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
         <a href="#" class="btn-header">Agendar consulta</a>
     </header>
 
@@ -103,11 +87,6 @@
                 <a href="#" class="btn btn-main">Agendar consulta</a>
                 <a href="#" class="btn btn-sec">Conhecer meu método</a>
             </div>
-
-            <div class="proof">
-                <div class="stars">★★★★★</div>
-                <span>+200 avaliações no Google • Foco em Hipertrofia</span>
-            </div>
         </div>
 
         <div class="hero-image">
@@ -115,5 +94,62 @@
         </div>
     </section>
 
+    <!-- Nova Seção de Autoridade -->
+    <section class="stats-bar" id="stats">
+        <div class="stat-item">
+            <div class="stat-number" data-target="200">+200</div>
+            <div class="stat-label">Avaliações Google</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="5">5.0</div>
+            <div class="stat-label">Estrelas</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="1500">+1500</div>
+            <div class="stat-label">Pacientes</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" style="font-size: 1.5rem; margin-top: 15px;">Sem</div>
+            <div class="stat-label">Terrorismo Alimentar</div>
+        </div>
+    </section>
+
+    <script>
+        const statsSection = document.querySelector('#stats');
+        const counters = document.querySelectorAll('.stat-number');
+        let activated = false;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const updateCount = () => {
+                    const count = +counter.innerText.replace(/[^0-9]/g, '');
+                    const speed = target / 100; 
+
+                    if(count < target) {
+                        counter.innerText = '+' + Math.ceil(count + speed);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = '+' + target;
+                    }
+                };
+                // Caso especial para o item estático ou decimais
+                if (!counter.hasAttribute('data-target') || target === 5) {
+                    if (target === 5) counter.innerText = '5.0';
+                    return;
+                }
+                updateCount();
+            });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !activated) {
+                animateCounters();
+                activated = true;
+            }
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+    </script>
 </body>
 </html>
