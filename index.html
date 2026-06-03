@@ -36,26 +36,27 @@
         .btn-sec { border: 1px solid var(--primary); color: var(--primary); }
         .hero-image img { width: 100%; border-radius: 10px; display: block; object-fit: cover; }
 
-        /* --- NOVA FAIXA DE PROVA SOCIAL (Ajustada) --- */
+        /* --- FAIXA DE PROVA SOCIAL CORRIGIDA --- */
         .stats-bar { 
-            background: var(--deep-green); 
+            background: linear-gradient(135deg, #2E3518 0%, #4A4F24 100%); 
             padding: 60px 5%; 
             display: flex; 
             justify-content: center; 
-            align-items: flex-start;
-            gap: 60px;
+            align-items: center;
+            gap: 80px;
         }
 
         .stat-item { 
             text-align: center;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(20px) scale(0.95);
             transition: all 0.8s ease-out;
+            min-width: 150px;
         }
         
         .stat-item.is-visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
         .number { 
@@ -64,16 +65,17 @@
             color: var(--white); 
             display: block;
             line-height: 1;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(153, 135, 64, 0.2);
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .label { 
-            font-size: 0.75rem; 
-            color: rgba(255, 255, 255, 0.7); 
+            display: block;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem; 
             text-transform: uppercase; 
             letter-spacing: 2px; 
-            font-weight: 400;
+            font-weight: 300;
         }
 
         /* --- Responsividade --- */
@@ -88,6 +90,7 @@
             
             /* Faixa Mobile */
             .stats-bar { flex-direction: column; gap: 40px; padding: 40px 5%; }
+            .stat-item { min-width: auto; }
             .number { font-size: 2.8rem; }
         }
     </style>
@@ -121,7 +124,7 @@
         </div>
     </section>
 
-    <!-- FAIXA DE PROVA SOCIAL AJUSTADA -->
+    <!-- FAIXA DE PROVA SOCIAL (CORRIGIDA) -->
     <section class="stats-bar" id="stats">
         <div class="stat-item">
             <span class="number" data-target="200" data-prefix="+">0</span>
@@ -144,12 +147,13 @@
         let activated = false;
 
         const animateCounters = () => {
+            // Animação de entrada dos blocos
             items.forEach((item, index) => {
-                // Adiciona delay progressivo para cada item
                 item.style.transitionDelay = `${index * 0.2}s`;
                 item.classList.add('is-visible');
             });
 
+            // Animação de contagem dos números
             counters.forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
                 const prefix = counter.getAttribute('data-prefix') || '';
@@ -175,6 +179,7 @@
             });
         };
 
+        // Trigger da animação
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && !activated) {
                 animateCounters();
