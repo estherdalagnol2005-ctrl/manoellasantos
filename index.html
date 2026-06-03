@@ -36,33 +36,47 @@
         .btn-sec { border: 1px solid var(--primary); color: var(--primary); }
         .hero-image img { width: 100%; border-radius: 10px; display: block; object-fit: cover; }
 
-        /* --- NOVA FAIXA DE PROVA SOCIAL (Minimalista) --- */
+        /* --- NOVA FAIXA DE PROVA SOCIAL (Ajustada) --- */
         .stats-bar { 
             background: var(--deep-green); 
-            padding: 50px 5%; 
+            padding: 60px 5%; 
             display: flex; 
-            justify-content: space-around; 
-            align-items: center;
-            margin-top: 20px;
+            justify-content: center; 
+            align-items: flex-start;
+            gap: 60px;
         }
 
         .stat-item { 
-            position: relative;
-            flex: 1;
             text-align: center;
-            border-right: 1px solid rgba(255,255,255,0.15);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
         }
-        .stat-item:last-child { border-right: none; }
+        
+        .stat-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .number { 
             font-family: 'Playfair Display', serif; 
-            font-size: clamp(2.5rem, 5vw, 4rem); 
+            font-size: 3.5rem; 
             color: var(--white); 
             display: block;
-            opacity: 0; /* Inicial para animação */
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(153, 135, 64, 0.2);
         }
 
-        /* --- Ajustes Responsivos --- */
+        .label { 
+            font-size: 0.75rem; 
+            color: rgba(255, 255, 255, 0.7); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-weight: 400;
+        }
+
+        /* --- Responsividade --- */
         @media (max-width: 992px) {
             .nav { display: none; }
             .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; text-align: center; }
@@ -72,9 +86,9 @@
             .hero-image { order: -1; padding: 0 10%; }
             .hero-image img { height: 350px; }
             
-            /* Faixa Mobile Compacta */
-            .stats-bar { padding: 30px 5%; }
-            .number { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+            /* Faixa Mobile */
+            .stats-bar { flex-direction: column; gap: 40px; padding: 40px 5%; }
+            .number { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -107,42 +121,49 @@
         </div>
     </section>
 
-    <!-- FAIXA DE PROVA SOCIAL MINIMALISTA -->
+    <!-- FAIXA DE PROVA SOCIAL AJUSTADA -->
     <section class="stats-bar" id="stats">
         <div class="stat-item">
             <span class="number" data-target="200" data-prefix="+">0</span>
+            <span class="label">avaliações no Google</span>
         </div>
         <div class="stat-item">
             <span class="number" data-target="5.0" data-fixed="true">0.0</span>
+            <span class="label">estrelas</span>
         </div>
         <div class="stat-item">
             <span class="number" data-target="1500" data-prefix="+">0</span>
+            <span class="label">pacientes atendidos</span>
         </div>
     </section>
 
     <script>
         const statsSection = document.querySelector('#stats');
         const counters = document.querySelectorAll('.number');
+        const items = document.querySelectorAll('.stat-item');
         let activated = false;
 
         const animateCounters = () => {
+            items.forEach((item, index) => {
+                // Adiciona delay progressivo para cada item
+                item.style.transitionDelay = `${index * 0.2}s`;
+                item.classList.add('is-visible');
+            });
+
             counters.forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
                 const prefix = counter.getAttribute('data-prefix') || '';
                 const isFixed = counter.getAttribute('data-fixed') === 'true';
                 
-                counter.style.transition = "opacity 0.8s ease";
-                counter.style.opacity = "1";
-
                 if (isFixed) {
                     counter.innerText = target.toFixed(1);
                 } else {
                     let count = 0;
-                    const duration = 2000; // 2 segundos de contagem
-                    const increment = target / (duration / 20);
+                    const duration = 2000; 
+                    const step = target / (duration / 20);
 
                     const update = setInterval(() => {
-                        count += increment;
+                        count += step;
                         if (count >= target) {
                             counter.innerText = prefix + Math.floor(target);
                             clearInterval(update);
