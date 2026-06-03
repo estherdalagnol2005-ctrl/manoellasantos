@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manoella Santos | Nutrição</title>
+    <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,19 +17,20 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- Header (Mantido) --- */
-        header { padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        /* --- Header & Topbar --- */
+        .topbar { background: var(--deep-green); color: var(--white); text-align: center; padding: 8px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+        header { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
         .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--deep-green); }
         .nav { display: flex; gap: 30px; align-items: center; }
-        .nav a { text-decoration: none; color: var(--text); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+        .nav a { text-decoration: none; color: var(--text); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; }
         .btn-header { background: var(--deep-green); color: var(--white); padding: 10px 20px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
 
-        /* --- Hero (Mantido) --- */
-        .hero { display: grid; grid-template-columns: 1fr 450px; align-items: center; gap: 80px; padding: 60px 5% 40px 5%; max-width: 1200px; margin: 0 auto; }
+        /* --- Hero --- */
+        .hero { display: grid; grid-template-columns: 1fr 450px; align-items: center; gap: 80px; padding: 60px 5%; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
         .hero-content h2 { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 20px; }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; color: var(--deep-green); margin-bottom: 25px; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); line-height: 1.1; color: var(--deep-green); margin-bottom: 25px; }
         .hero-content p { font-size: 1.1rem; color: #4a4a4a; margin-bottom: 35px; max-width: 500px; }
         .btn-group { display: flex; gap: 15px; }
         .btn { padding: 16px 30px; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-decoration: none; text-align: center; }
@@ -36,67 +38,43 @@
         .btn-sec { border: 1px solid var(--primary); color: var(--primary); }
         .hero-image img { width: 100%; border-radius: 10px; display: block; object-fit: cover; }
 
-        /* --- FAIXA DE PROVA SOCIAL CORRIGIDA --- */
-        .stats-bar { 
-            background: linear-gradient(135deg, #2E3518 0%, #4A4F24 100%); 
-            padding: 60px 5%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            gap: 80px;
-        }
+        /* --- Faixa de Prova Social --- */
+        .stats-bar { background: linear-gradient(135deg, #2E3518 0%, #4A4F24 100%); padding: 60px 5%; display: flex; justify-content: center; align-items: flex-start; gap: 80px; }
+        .stat-item { text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+        .stat-item.is-visible { opacity: 1; transform: translateY(0); }
+        .number { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--white); display: block; line-height: 1; margin-bottom: 8px; }
+        .label { display: block; color: rgba(255, 255, 255, 0.85); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 300; }
 
-        .stat-item { 
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            transition: all 0.8s ease-out;
-            min-width: 150px;
-        }
-        
-        .stat-item.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        /* --- Segunda Dobra (Método) --- */
+        #method-section { padding: 100px 5%; background: var(--bg); }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .method-intro { text-align: center; margin-bottom: 60px; }
+        .method-intro h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--deep-green); margin-bottom: 15px; }
+        .method-intro p { font-size: 1.1rem; color: #555; max-width: 600px; margin: 0 auto; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .method-card { padding: 40px; border-radius: 20px; background: white; transition: all 0.4s ease; opacity: 0; transform: translateY(30px); }
+        .nsr-card { border: 2px solid var(--primary); box-shadow: 0 10px 30px rgba(153, 135, 64, 0.1); }
+        .moda-card { border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .method-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 25px; color: var(--deep-green); text-align: center; }
+        .method-card li { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-size: 0.95rem; color: #444; }
+        .method-card li.muted { color: #888; }
+        .is-visible { opacity: 1; transform: translateY(0); }
 
-        .number { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 3.5rem; 
-            color: var(--white); 
-            display: block;
-            line-height: 1;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .label { 
-            display: block;
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 0.85rem; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            font-weight: 300;
-        }
-
-        /* --- Responsividade --- */
+        /* Responsividade */
         @media (max-width: 992px) {
             .nav { display: none; }
-            .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; text-align: center; }
-            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero { grid-template-columns: 1fr; gap: 40px; text-align: center; padding-top: 40px; }
+            .hero-content { align-items: center; }
             .btn-group { flex-direction: column; width: 100%; }
-            .btn { width: 100%; }
-            .hero-image { order: -1; padding: 0 10%; }
-            .hero-image img { height: 350px; }
-            
-            /* Faixa Mobile */
+            .hero-image { order: -1; }
             .stats-bar { flex-direction: column; gap: 40px; padding: 40px 5%; }
-            .stat-item { min-width: auto; }
-            .number { font-size: 2.8rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <div class="topbar">Resultados sem terrorismo alimentar</div>
     <header>
         <div class="logo">Manoella Santos</div>
         <nav class="nav">
@@ -112,19 +90,16 @@
             <h2>Nutrição Esportiva Sem Radicalismo</h2>
             <h1>Ganhe massa, perca gordura e coma sem radicalismo.</h1>
             <p>Nutrição personalizada para mulheres que querem transformar o corpo com estratégia, constância e liberdade alimentar.</p>
-            
             <div class="btn-group">
                 <a href="#" class="btn btn-main">Agendar consulta</a>
                 <a href="#" class="btn btn-sec">Conhecer meu método</a>
             </div>
         </div>
-
         <div class="hero-image">
             <img src="https://images.unsplash.com/photo-1605281317010-fe5ffe798160?q=80&w=800&auto=format&fit=crop" alt="Manoella Santos">
         </div>
     </section>
 
-    <!-- FAIXA DE PROVA SOCIAL (CORRIGIDA) -->
     <section class="stats-bar" id="stats">
         <div class="stat-item">
             <span class="number" data-target="200" data-prefix="+">0</span>
@@ -140,21 +115,70 @@
         </div>
     </section>
 
+    <section id="method-section">
+        <div class="container">
+            <div class="method-intro">
+                <h2>O problema não é você. É o método.</h2>
+                <p>Com o Método NSR, você aprende a comer de tudo com estratégia, ganha massa, perde gordura e mantém seus resultados sem viver presa em restrições sem sentido.</p>
+            </div>
+            <div class="comparison-grid">
+                <div class="method-card nsr-card">
+                    <h3>Método NSR</h3>
+                    <ul>
+                        <li>✓ Liberdade com estratégia</li>
+                        <li>✓ Plano personalizado</li>
+                        <li>✓ Mais opções nas refeições</li>
+                        <li>✓ Substituições inteligentes</li>
+                        <li>✓ Acompanhamento e ajustes</li>
+                        <li>✓ Resultado duradouro</li>
+                    </ul>
+                </div>
+                <div class="method-card moda-card">
+                    <h3>Dietas da Moda</h3>
+                    <ul>
+                        <li class="muted">× Restrição sem sentido</li>
+                        <li class="muted">× Regras prontas</li>
+                        <li class="muted">× Difícil de manter</li>
+                        <li class="muted">× Culpa ao sair do plano</li>
+                        <li class="muted">× Promessa rápida</li>
+                        <li class="muted">× Efeito sanfona</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
-        const statsSection = document.querySelector('#stats');
-        const counters = document.querySelectorAll('.number');
-        const items = document.querySelectorAll('.stat-item');
-        let activated = false;
-
-        const animateCounters = () => {
-            // Animação de entrada dos blocos
-            items.forEach((item, index) => {
-                item.style.transitionDelay = `${index * 0.2}s`;
-                item.classList.add('is-visible');
+        // Intersection Observer para animações
+        const observerOptions = { threshold: 0.3 };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Anima Stats
+                    if (entry.target.id === 'stats') {
+                        document.querySelectorAll('.stat-item').forEach((item, i) => {
+                            item.style.transitionDelay = `${i * 0.2}s`;
+                            item.classList.add('is-visible');
+                        });
+                        animateCounters();
+                    }
+                    // Anima Cards
+                    if (entry.target.id === 'method-section') {
+                        document.querySelectorAll('.method-card').forEach((card, i) => {
+                            card.style.transitionDelay = `${i * 0.2}s`;
+                            card.classList.add('is-visible');
+                        });
+                    }
+                }
             });
+        }, observerOptions);
 
-            // Animação de contagem dos números
-            counters.forEach(counter => {
+        observer.observe(document.querySelector('#stats'));
+        observer.observe(document.querySelector('#method-section'));
+
+        function animateCounters() {
+            document.querySelectorAll('.number').forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
                 const prefix = counter.getAttribute('data-prefix') || '';
                 const isFixed = counter.getAttribute('data-fixed') === 'true';
@@ -163,9 +187,8 @@
                     counter.innerText = target.toFixed(1);
                 } else {
                     let count = 0;
-                    const duration = 2000; 
+                    const duration = 2000;
                     const step = target / (duration / 20);
-
                     const update = setInterval(() => {
                         count += step;
                         if (count >= target) {
@@ -177,17 +200,7 @@
                     }, 20);
                 }
             });
-        };
-
-        // Trigger da animação
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && !activated) {
-                animateCounters();
-                activated = true;
-            }
-        }, { threshold: 0.3 });
-
-        observer.observe(statsSection);
+        }
     </script>
 </body>
 </html>
