@@ -18,14 +18,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-        /* --- Header --- */
+        /* --- Header (Mantido) --- */
         header { padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
         .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--deep-green); }
         .nav { display: flex; gap: 30px; align-items: center; }
         .nav a { text-decoration: none; color: var(--text); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
         .btn-header { background: var(--deep-green); color: var(--white); padding: 10px 20px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
 
-        /* --- Hero --- */
+        /* --- Hero (Mantido) --- */
         .hero { display: grid; grid-template-columns: 1fr 450px; align-items: center; gap: 80px; padding: 60px 5% 40px 5%; max-width: 1200px; margin: 0 auto; }
         .hero-content h2 { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 20px; }
         .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; color: var(--deep-green); margin-bottom: 25px; }
@@ -36,21 +36,33 @@
         .btn-sec { border: 1px solid var(--primary); color: var(--primary); }
         .hero-image img { width: 100%; border-radius: 10px; display: block; object-fit: cover; }
 
-        /* --- Faixa de Autoridade (Stats Bar) --- */
+        /* --- NOVA FAIXA DE PROVA SOCIAL (Minimalista) --- */
         .stats-bar { 
             background: var(--deep-green); 
-            color: var(--white); 
-            padding: 60px 5%; 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 30px; 
-            text-align: center;
+            padding: 50px 5%; 
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center;
+            margin-top: 20px;
         }
-        .stat-item { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .stat-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 5px; }
-        .stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
 
-        /* --- Responsividade --- */
+        .stat-item { 
+            position: relative;
+            flex: 1;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.15);
+        }
+        .stat-item:last-child { border-right: none; }
+
+        .number { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 5vw, 4rem); 
+            color: var(--white); 
+            display: block;
+            opacity: 0; /* Inicial para animação */
+        }
+
+        /* --- Ajustes Responsivos --- */
         @media (max-width: 992px) {
             .nav { display: none; }
             .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; text-align: center; }
@@ -60,8 +72,9 @@
             .hero-image { order: -1; padding: 0 10%; }
             .hero-image img { height: 350px; }
             
-            /* Stats Mobile */
-            .stats-bar { grid-template-columns: 1fr 1fr; gap: 40px 20px; padding: 40px 5%; }
+            /* Faixa Mobile Compacta */
+            .stats-bar { padding: 30px 5%; }
+            .number { font-size: clamp(1.8rem, 6vw, 2.5rem); }
         }
     </style>
 </head>
@@ -94,51 +107,50 @@
         </div>
     </section>
 
-    <!-- Nova Seção de Autoridade -->
+    <!-- FAIXA DE PROVA SOCIAL MINIMALISTA -->
     <section class="stats-bar" id="stats">
         <div class="stat-item">
-            <div class="stat-number" data-target="200">+200</div>
-            <div class="stat-label">Avaliações Google</div>
+            <span class="number" data-target="200" data-prefix="+">0</span>
         </div>
         <div class="stat-item">
-            <div class="stat-number" data-target="5">5.0</div>
-            <div class="stat-label">Estrelas</div>
+            <span class="number" data-target="5.0" data-fixed="true">0.0</span>
         </div>
         <div class="stat-item">
-            <div class="stat-number" data-target="1500">+1500</div>
-            <div class="stat-label">Pacientes</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" style="font-size: 1.5rem; margin-top: 15px;">Sem</div>
-            <div class="stat-label">Terrorismo Alimentar</div>
+            <span class="number" data-target="1500" data-prefix="+">0</span>
         </div>
     </section>
 
     <script>
         const statsSection = document.querySelector('#stats');
-        const counters = document.querySelectorAll('.stat-number');
+        const counters = document.querySelectorAll('.number');
         let activated = false;
 
         const animateCounters = () => {
             counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const updateCount = () => {
-                    const count = +counter.innerText.replace(/[^0-9]/g, '');
-                    const speed = target / 100; 
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const prefix = counter.getAttribute('data-prefix') || '';
+                const isFixed = counter.getAttribute('data-fixed') === 'true';
+                
+                counter.style.transition = "opacity 0.8s ease";
+                counter.style.opacity = "1";
 
-                    if(count < target) {
-                        counter.innerText = '+' + Math.ceil(count + speed);
-                        setTimeout(updateCount, 20);
-                    } else {
-                        counter.innerText = '+' + target;
-                    }
-                };
-                // Caso especial para o item estático ou decimais
-                if (!counter.hasAttribute('data-target') || target === 5) {
-                    if (target === 5) counter.innerText = '5.0';
-                    return;
+                if (isFixed) {
+                    counter.innerText = target.toFixed(1);
+                } else {
+                    let count = 0;
+                    const duration = 2000; // 2 segundos de contagem
+                    const increment = target / (duration / 20);
+
+                    const update = setInterval(() => {
+                        count += increment;
+                        if (count >= target) {
+                            counter.innerText = prefix + Math.floor(target);
+                            clearInterval(update);
+                        } else {
+                            counter.innerText = prefix + Math.floor(count);
+                        }
+                    }, 20);
                 }
-                updateCount();
             });
         };
 
@@ -147,7 +159,7 @@
                 animateCounters();
                 activated = true;
             }
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         observer.observe(statsSection);
     </script>
