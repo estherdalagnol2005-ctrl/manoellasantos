@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manoella Santos | Nutrição Esportiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #998740;
+            --dark-green: #4A4F24;
+            --deep-green: #2E3518;
+            --soft-gold: #C8BB76;
+            --bg-cream: #F7F2E6;
+            --white: #FFFFFF;
+            --text-dark: #1F2118;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animações */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Topbar */
+        .topbar { background-color: var(--deep-green); color: var(--white); padding: 10px 0; text-align: center; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Header */
+        header { padding: 30px 8%; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: var(--deep-green); }
+        .menu { display: flex; gap: 30px; }
+        .menu a { text-decoration: none; color: var(--text-dark); font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+        .menu a:hover { color: var(--primary); }
+        
+        /* Botões Delicados */
+        .btn-cta { 
+            background-color: var(--primary); 
+            color: var(--white); 
+            padding: 12px 30px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+        .btn-cta:hover { background-color: transparent; color: var(--primary); transform: translateY(-3px); }
+
+        /* Hero */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; padding: 80px 8%; max-width: 1400px; margin: 0 auto; }
+        
+        .hero-content h2 { color: var(--primary); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 3.8rem; color: var(--deep-green); line-height: 1.1; margin-bottom: 25px; }
+        .hero-content p { font-size: 1.1rem; margin-bottom: 35px; color: #444; max-width: 500px; }
+        
+        .hero-actions { display: flex; gap: 20px; }
+        .btn-main { background: var(--primary); color: white; padding: 16px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition); }
+        .btn-main:hover { background: var(--deep-green); transform: scale(1.05); }
+        
+        .btn-sec { border: 1px solid var(--primary); color: var(--primary); padding: 16px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition); }
+        .btn-sec:hover { background: var(--primary); color: white; transform: scale(1.05); }
+
+        .hero-image { position: relative; animation: fadeIn 1.5s ease; }
+        .hero-image img { width: 100%; border-radius: 20px; display: block; object-fit: cover; }
+        
+        /* Ajuste de animação com delay */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero-content p { max-width: 100%; }
+            .menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">Resultados reais • Hipertrofia e Emagrecimento</div>
+
+    <header>
+        <div class="logo">Manoella Santos</div>
+        <nav class="menu">
+            <a href="#">Sobre</a>
+            <a href="#">Atendimento</a>
+            <a href="#">Resultados</a>
+        </nav>
+        <a href="#" class="btn-cta">Agendar consulta</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2 class="fade-in-up">Nutrição sem radicalismo</h2>
+            <h1 class="fade-in-up delay-1">Ganhe massa, perca gordura e coma sem radicalismo.</h1>
+            <p class="fade-in-up delay-2">Nutrição personalizada para mulheres que querem transformar o corpo com estratégia, constância e liberdade alimentar.</p>
+            
+            <div class="hero-actions fade-in-up delay-3">
+                <a href="#" class="btn-main">Agendar consulta</a>
+                <a href="#" class="btn-sec">Conhecer meu método</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1605281317010-fe5ffe798160?q=80&w=800&auto=format&fit=crop" alt="Manoella Santos">
+        </div>
+    </section>
+
+    <script>
+        // Opcional: Adicionar classe de "show" se quiser controlar animações via JS
+        // Neste exemplo, usei CSS puro para performance.
+    </script>
+</body>
+</html>
